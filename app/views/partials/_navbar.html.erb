@@ -22,9 +22,23 @@
             <li class="nav-item">
               <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
             </li>
+          <% elsif instructor_signed_in? %>
+            <li class="nav-item">
+              <span class="navbar-text px-3">
+              <%= current_instructor.email %>
+              </span>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign Out", destroy_instructor_session_path, method: :delete, class: "btn btn-outline-secondary" %>
+            </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to "Sign In", new_user_session_path, method: :get, class: "btn btn-outline-primary" %>
+              <%= link_to "Parent Sign In", new_user_session_path, method: :get, class: "btn btn-primary" %>
+            </li>
+            <li class="nav-item m-2">
+            </li>
+            <li class="nav-item">
+              <%= link_to "Instructor Sign In", new_instructor_session_path, method: :get, class: "btn btn-primary" %>
             </li>
           <% end %>
         </ul>
