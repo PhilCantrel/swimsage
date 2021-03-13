@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@user_profile) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :firstname, :label => "First Name" %>
+    <%= f.input :lastname, :label => "Last Name" %>
+    <%= f.input :phone, :label => "Phone Number (+61)"%>
+    <%= f.input :address, :label => "Street Address"%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

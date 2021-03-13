@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_profiles
   devise_for :instructors, path: "instructors", controllers: { sessions: "instructors/sessions", confirmations: "instructors/confirmations", passwords: "instructors/passwords", registrations: "instructors/registrations", unlocks: "instructors/unlocks"}
   devise_for :users, path: 'users', controllers: { sessions: "users/sessions", confirmations: "users/confirmations", passwords: "users/passwords", registrations: "users/registrations", unlocks: "users/unlocks"}
   root 'home#page'
