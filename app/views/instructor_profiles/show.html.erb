@@ -1,28 +1,32 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Firstname:</strong>
-  <%= @instructor_profile.firstname %>
+<% if @instructor_profile.profile_picture.attached? %>
+  <%= image_tag @instructor_profile.profile_picture, class: "pro-pic"%>
+<% else %>
+  <%= image_tag "defaultpp.png", class: "pro-pic"%>
+<% end%>
+<p>
+  <strong>Name: </strong>
+  <%= "#{@instructor_profile.firstname} #{@instructor_profile.lastname}" %>
 </p>
 
 <p>
-  <strong>Lastname:</strong>
-  <%= @instructor_profile.lastname %>
+  <strong>Email: </strong>
+  <%= @instructor_profile.instructor.email %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
-  <%= @instructor_profile.phone %>
+  <strong>Phone: </strong>
+  (+61)<%= @instructor_profile.phone %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong>Address: </strong>
   <%= @instructor_profile.address %>
 </p>
 
 <p>
   <strong>Rate:</strong>
-  <%= @instructor_profile.rate %>
+  $<%= @instructor_profile.rate %>
 </p>
 
 <%= link_to 'Edit', edit_instructor_profile_path(@instructor_profile) %> |

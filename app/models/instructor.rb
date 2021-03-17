@@ -5,6 +5,7 @@ class Instructor < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_one :instructor_profile, dependent: :destroy
+  has_many :timeslots, dependent: :destroy
   after_create :init_instructor_profile
 
   def init_instructor_profile

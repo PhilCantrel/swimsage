@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_115606) do
+ActiveRecord::Schema.define(version: 2021_03_17_140234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(version: 2021_03_17_115606) do
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 
+  create_table "timeslots", force: :cascade do |t|
+    t.string "weekday", limit: 10
+    t.time "time"
+    t.boolean "available"
+    t.bigint "instructor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["instructor_id"], name: "index_timeslots_on_instructor_id"
+  end
+
   create_table "user_profiles", force: :cascade do |t|
     t.string "firstname", limit: 20
     t.string "lastname", limit: 20
@@ -116,5 +126,6 @@ ActiveRecord::Schema.define(version: 2021_03_17_115606) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "instructor_profiles", "instructors"
   add_foreign_key "students", "users"
+  add_foreign_key "timeslots", "instructors"
   add_foreign_key "user_profiles", "users"
 end

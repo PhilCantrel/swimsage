@@ -4,14 +4,17 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :firstname %>
-    <%= f.input :lastname %>
-    <%= f.input :phone %>
-    <%= f.input :address %>
-    <%= f.input :rate %>
+    <%= f.input :firstname, :label => "First Name" %>
+    <%= f.input :lastname, :label => "Last Name" %>
+    <p> Upload a Profile Picture </p>
+    <%= f.file_field :profile_picture%>
+    <hr class="my-4">
+    <%= f.input :phone, :label => "Phone Number (+61)"%>
+    <%= f.input :address, :label => "Street Address"%>
+    <%= f.input :rate, :label => "Round Hourly Rate in AUD (eg. 35)"%>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
 <% end %>

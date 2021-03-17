@@ -22,7 +22,7 @@ class InstructorProfilesController < ApplicationController
   # POST /instructor_profiles or /instructor_profiles.json
   def create
     @instructor_profile = InstructorProfile.new(instructor_profile_params)
-
+    @instructor_profile.instructor_id = current_instructor.id
     respond_to do |format|
       if @instructor_profile.save
         format.html { redirect_to @instructor_profile, notice: "Instructor profile was successfully created." }
@@ -59,11 +59,11 @@ class InstructorProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor_profile
-      @instructor_profile = @current_instructor.instructor_profile
+      @instructor_profile = current_instructor.instructor_profile
     end
 
     # Only allow a list of trusted parameters through.
     def instructor_profile_params
-      params.require(:instructor_profile).permit(:firstname, :lastname, :phone, :address, :rate)
+      params.require(:instructor_profile).permit(:firstname, :lastname, :phone, :address, :rate, :instructor_id, :profile_picture)
     end
 end
