@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :user_profile, dependent: :destroy
+  has_many :students, dependent: :destroy
   after_create :init_user_profile
 
   def init_user_profile

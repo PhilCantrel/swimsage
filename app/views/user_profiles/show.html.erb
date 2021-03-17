@@ -1,30 +1,61 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>User:</strong>
-  <%= @current_user.email %>
+<% if @user_profile.profile_picture.attached? %>
+  <%= image_tag @user_profile.profile_picture, class: "pro-pic"%>
+<% else %>
+  <%= image_tag "defaultpp.png", class: "pro-pic"%>
+<% end%>
+<p>
+  <strong>Name: </strong>
+  <%= "#{@user_profile.firstname} #{@user_profile.lastname}" %>
 </p>
 
 <p>
-  <strong>Firstname:</strong>
-  <%= @user_profile.firstname %>
+  <strong>Email: </strong>
+  <%= @user_profile.user.email %>
 </p>
 
 <p>
-  <strong>Lastname:</strong>
-  <%= @user_profile.lastname %>
+  <strong>Phone: </strong>
+  (+61)<%= @user_profile.phone %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
-  <%= @user_profile.phone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
+  <strong>Address: </strong>
   <%= @user_profile.address %>
 </p>
 
+<p class="fs-6">
+Registered Students:</p>
+<p>
+<table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Dob</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.firstname %></td>
+        <td><%= student.lastname %></td>
+        <td><%= student.dob %></td>
+        <td><%= student.user_id %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Add Student', new_student_path, class: "btn btn-primary" %>
+</p>
 
 <%= link_to 'Edit', edit_user_profile_path(@user_profile) %> |
 <%= link_to 'Back', user_profiles_path %>

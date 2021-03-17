@@ -8,6 +8,7 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1 or /user_profiles/1.json
   def show
+    @students = Student.where(user_id: current_user.id)
   end
 
   # GET /user_profiles/new
@@ -61,9 +62,10 @@ class UserProfilesController < ApplicationController
     def set_user_profile
       @user_profile = current_user.user_profile
     end
+    
 
     # Only allow a list of trusted parameters through.
     def user_profile_params
-      params.require(:user_profile).permit(:firstname, :lastname, :phone, :address, :user_id)
+      params.require(:user_profile).permit(:firstname, :lastname, :phone, :address, :user_id, :profile_picture)
     end
 end

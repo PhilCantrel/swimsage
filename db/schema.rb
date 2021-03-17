@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_13_152233) do
+ActiveRecord::Schema.define(version: 2021_03_17_115606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 2021_03_13_152233) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "instructor_profiles", force: :cascade do |t|
+    t.string "firstname", limit: 20
+    t.string "lastname", limit: 20
+    t.string "phone", limit: 15
+    t.string "address"
+    t.integer "rate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "instructor_id", null: false
+    t.index ["instructor_id"], name: "index_instructor_profiles_on_instructor_id"
+  end
+
   create_table "instructors", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,6 +65,16 @@ ActiveRecord::Schema.define(version: 2021_03_13_152233) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_instructors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_instructors_on_reset_password_token", unique: true
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "firstname", limit: 20
+    t.string "lastname", limit: 20
+    t.date "dob"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "user_profiles", force: :cascade do |t|
@@ -92,5 +114,7 @@ ActiveRecord::Schema.define(version: 2021_03_13_152233) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "instructor_profiles", "instructors"
+  add_foreign_key "students", "users"
   add_foreign_key "user_profiles", "users"
 end
