@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_user_profile
 
   # GET /students or /students.json
   def index 
@@ -26,7 +27,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: "Student was successfully created." }
+        format.html { redirect_to @user_profile, notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: "Student was successfully updated." }
+        format.html { redirect_to @user_profile, notice: "Student was successfully updated." }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
+      format.html { redirect_to @user_profile, notice: "Student was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -62,6 +63,10 @@ class StudentsController < ApplicationController
     def set_student
       @students = current_user.students
       @student = @students.find(params[:id])
+    end
+
+    def set_user_profile
+      @user_profile = current_user.user_profile
     end
 
     # Only allow a list of trusted parameters through.
