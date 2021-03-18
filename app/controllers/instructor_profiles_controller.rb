@@ -8,6 +8,9 @@ class InstructorProfilesController < ApplicationController
 
   # GET /instructor_profiles/1 or /instructor_profiles/1.json
   def show
+    @timeslots = Timeslot.where(instructor_id: current_instructor.id)
+    @daytime = Daytime.all
+    
   end
 
   # GET /instructor_profiles/new
