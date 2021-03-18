@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_140234) do
+ActiveRecord::Schema.define(version: 2021_03_18_040516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2021_03_17_140234) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "daytimes", force: :cascade do |t|
+    t.string "weekday", limit: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "time", limit: 5
   end
 
   create_table "instructor_profiles", force: :cascade do |t|
@@ -78,12 +85,13 @@ ActiveRecord::Schema.define(version: 2021_03_17_140234) do
   end
 
   create_table "timeslots", force: :cascade do |t|
-    t.string "weekday", limit: 10
-    t.time "time"
     t.boolean "available"
     t.bigint "instructor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "booked"
+    t.bigint "daytime_id", null: false
+    t.index ["daytime_id"], name: "index_timeslots_on_daytime_id"
     t.index ["instructor_id"], name: "index_timeslots_on_instructor_id"
   end
 
@@ -126,6 +134,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_140234) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "instructor_profiles", "instructors"
   add_foreign_key "students", "users"
+  add_foreign_key "timeslots", "daytimes"
   add_foreign_key "timeslots", "instructors"
   add_foreign_key "user_profiles", "users"
 end

@@ -11,4 +11,5 @@ class Instructor < ApplicationRecord
   def init_instructor_profile
     self.create_instructor_profile!
   end
+
 end
