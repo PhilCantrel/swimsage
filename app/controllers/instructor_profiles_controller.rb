@@ -1,4 +1,5 @@
 class InstructorProfilesController < ApplicationController
+  before_action :authenticate_instructor!
   before_action :set_instructor_profile, only: %i[ show edit update destroy ]
 
   # GET /instructor_profiles or /instructor_profiles.json

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root 'home#page'
   patch '/timeslot/available', to: 'timeslot#mark_available', as: 'mark_available'
   patch '/timeslot/unavailable', to: 'timeslot#mark_unavailable', as: 'mark_unavailable'
+  get '/view_instructors', to: 'view_instructor#all', as: 'view_instructors'
 end

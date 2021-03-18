@@ -1,0 +1,17 @@
+<p class="h1 text-center mb-3 bg-light w-50 mx-auto border rounded">Find an Instructor</p>
+<div class="d-flex flex-wrap bg-light p-4 border rounded w-auto mx-5 mt-2 mb-3">
+<% @instructors.each do |instructor|%>
+    <div class="card mx-3" style="width: 18rem;">
+        <% if instructor.profile_picture.attached? %>
+            <%= image_tag instructor.profile_picture, class: "card-img-top card-pic"%>
+        <% else %>
+            <%= image_tag "defaultpp.png", class: "card-img-top card-pic"%>
+        <% end%>
+        <div class="card-body">
+            <h5 class="card-title"><%= "#{instructor.firstname} #{instructor.lastname}"%></h5>
+            <p class="card-text">Instructor skills would go here</p>
+            <a href="#" class="btn btn-primary">Book Instructor</a>
+        </div>
+    </div>
+<%end%>
+</div>
