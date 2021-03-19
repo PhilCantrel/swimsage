@@ -12,5 +12,11 @@ class TimeslotController < ApplicationController
         @selected_timeslot.update(available: false)
         redirect_to "#{url_for(@instructor_profile)}#timeconfig", notice: "Timeslot Marked as Unavailable"
     end
+
+
+    def show
+        @timeslots = Timeslot.where(instructor_id: params[:instructor_id])
+        @daytime = Daytime.all
+    end
     
 end

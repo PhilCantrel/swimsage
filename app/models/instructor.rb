@@ -6,6 +6,7 @@ class Instructor < ApplicationRecord
   
   has_one :instructor_profile, dependent: :destroy
   has_many :timeslots, dependent: :destroy
+  has_many :bookings
   after_create :init_instructor_profile
 
   def init_instructor_profile

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bookings
   resources :instructor_profiles
   resources :students
   resources :user_profiles
@@ -7,5 +8,6 @@ Rails.application.routes.draw do
   root 'home#page'
   patch '/timeslot/available', to: 'timeslot#mark_available', as: 'mark_available'
   patch '/timeslot/unavailable', to: 'timeslot#mark_unavailable', as: 'mark_unavailable'
+  get '/timeslot/show', to: 'timeslot#show', as: 'show_timeslot'
   get '/view_instructors', to: 'view_instructor#all', as: 'view_instructors'
 end

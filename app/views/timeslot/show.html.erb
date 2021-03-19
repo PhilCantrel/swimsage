@@ -1,0 +1,15 @@
+<p id="timeconfig" class="h1 text-center mb-3 bg-light w-50 mx-auto border rounded">Select Timeslot</p>
+<div class="d-flex flex-wrap bg-light p-4 border rounded w-auto mx-5 mt-2 mb-3">
+<% @timeslots.order(:id).each do |timeslot| %>
+    <% if timeslot.available %>
+    <%= link_to new_booking_path(timeslot_id: timeslot.id, instructor_id: params[:instructor_id])  do %>
+    <div class="border rounded m-1 p-2 text-primary">
+    <p class = "m-0">
+    <strong><%= @daytime.find("#{timeslot.daytime_id}").weekday %></strong>:
+    <%= @daytime.find("#{timeslot.daytime_id}").time %>
+    </p>
+    </div>
+    <%end%>
+  <%end %>
+<%end%>
+</div>
