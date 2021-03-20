@@ -11,6 +11,10 @@ class InstructorProfilesController < ApplicationController
   def show
     @timeslots = Timeslot.where(instructor_id: current_instructor.id)
     @daytime = Daytime.all
+    @students = Student.all
+    @parents = UserProfile.all
+    @current_bookings = Booking.where(instructor_id: current_instructor.id)
+    
     
   end
 

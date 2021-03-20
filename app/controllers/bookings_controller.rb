@@ -8,11 +8,21 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1 or /bookings/1.json
   def show
+    @instructor = InstructorProfile.where(instructor_id: @booking.instructor_id).first
+    @student = Student.find(@booking.student_id)
+    @daytime_id = Timeslot.where(id: @booking.timeslot_id).first.daytime_id
+    @dayandtime = Daytime.find(@daytime_id)
   end
 
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @instructor = InstructorProfile.where(instructor_id: params[:instructor_id])
+    @daytime_id = Timeslot.where(id: params[:timeslot_id]).first.daytime_id
+    @dayandtime = Daytime.find(@daytime_id)
+    weekday = @dayandtime.weekday.downcase
+    @date= Date.today.next_occurring(weekday.to_sym)
+    @cost = @instructor.first.rate
   end
 
   # GET /bookings/1/edit

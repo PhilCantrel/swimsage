@@ -1,5 +1,24 @@
-<h1>New Booking</h1>
-
+<hr class="my-2">
+<p class="h1 text-center bg-light w-50 mx-auto rounded">Select Child and Confirm</p>
+<hr class="mt-2 mb-4">
+<div class="bg-light p-4 border rounded w-auto mx-5 mt-2 mb-2">
+<p>
+<strong><u>Instructor</u></strong>
+<br>
+<%="#{@instructor.first.firstname} #{@instructor.first.lastname}"%>
+</p>
+<p>
+<strong><u>Day & Time</u></strong>
+<br>
+Next <%= @dayandtime.weekday%> the <%= @date.day.ordinalize%> at <%= @dayandtime.time%>
+</p>
+<p>
+<strong><u>Cost</u></strong> 
+<br>
+$<%= @cost%>
 <%= render 'form', booking: @booking %>
-
-<%= link_to 'Back', bookings_path %>
+</div>
+<div class="d-flex flex-wrap p-4 w-auto mx-5 mt-2 mb-3">
+<%= button_to "Select Different Time", show_timeslot_path, class: "btn btn-primary mr-3", params: {instructor_id: params[:instructor_id]}, method: :get %>
+<%= link_to 'Select Different Instructor', view_instructors_path, class: 'btn btn-primary'%>
+</div>

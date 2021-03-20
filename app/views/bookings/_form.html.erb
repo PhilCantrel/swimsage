@@ -6,13 +6,17 @@
   <div class="form-inputs">
     <%= f.hidden_field :instructor_id, value: params[:instructor_id] %>
     <%= f.hidden_field :user_id, value: current_user.id %>
+    <strong>Select Child:</strong>
+    <p>
     <%= f.collection_select :student_id, Student.all.where(user_id: current_user.id), :id, :firstname %>
+    </p>
     <%= f.hidden_field :timeslot_id, value: params[:timeslot_id]%>
     <% @cost = InstructorProfile.where(instructor_id: params[:instructor_id]).pluck(:rate) %>
     <%= f.hidden_field :cost, value: @cost%>
+    <%= f.hidden_field :date, value: @date%>
   </div>
-
+<hr class="my-2">
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.submit "Confirm Booking", class: 'btn btn-primary mt-2'%>
   </div>
 <% end %>

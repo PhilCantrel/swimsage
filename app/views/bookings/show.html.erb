@@ -1,34 +1,37 @@
-<p id="notice"><%= notice %></p>
+<hr class="my-2">
+<p class="h1 text-center bg-light w-50 mx-auto rounded">Booking Confirmed</p>
+<hr class="mt-2 mb-4">
+<div class="bg-light p-4 border rounded w-auto mx-5 mt-2 mb-2">
 
 <p>
-  <strong>Instructor:</strong>
-  <%= @booking.instructor_id %>
+  <strong><u>Instructor</u></strong>
+  <br>
+  <%= "#{@instructor.firstname} #{@instructor.lastname}" %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @booking.user_id %>
+  <strong><u>Student</u></strong>
+  <br>
+  <%= "#{@student.firstname} #{@student.lastname}" %>
+</p>
+
+
+<p>
+<strong><u>Day & Time</u></strong>
+<br>
+<%= @booking.date.strftime('%A') %> the <%= @booking.date.day.ordinalize%> at <%= @dayandtime.time%>
 </p>
 
 <p>
-  <strong>Student:</strong>
-  <%= @booking.student_id %>
+  <strong><u>Cost</u></strong>
+  <br>
+  $<%= @booking.cost %>
 </p>
 
-<p>
-  <strong>Timeslot:</strong>
-  <%= @booking.timeslot_id %>
-</p>
+<hr class="mt-2 mb-4">
 
-<p>
-  <strong>Date:</strong>
-  <%= @booking.date %>
-</p>
+<%= link_to 'Back to Profile', user_profile_path, class: 'btn btn-primary mr-3'%>
+<%= link_to 'Make Another Booking', view_instructors_path, class: 'btn btn-primary'%>
 
-<p>
-  <strong>Cost:</strong>
-  <%= @booking.cost %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>

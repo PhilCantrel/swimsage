@@ -10,6 +10,9 @@ class UserProfilesController < ApplicationController
   # GET /user_profiles/1 or /user_profiles/1.json
   def show
     @students = Student.where(user_id: current_user.id)
+    @bookings = Booking.all.order(:date)
+    @timeslots = Timeslot.all
+    @daytime = Daytime.all
   end
 
   # GET /user_profiles/new

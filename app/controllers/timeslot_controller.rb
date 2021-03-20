@@ -15,6 +15,7 @@ class TimeslotController < ApplicationController
 
 
     def show
+        @bookings = Booking.where(instructor_id: params[:instructor_id])
         @timeslots = Timeslot.where(instructor_id: params[:instructor_id])
         @daytime = Daytime.all
     end
