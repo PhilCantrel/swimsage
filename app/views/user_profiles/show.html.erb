@@ -38,18 +38,17 @@
         <p class=" h4 text-center mt-4">Children</p>
         <hr class="my-4">
         <% @students.each do |student| %>
-        <% @booking = @bookings.where(student_id: student.id).first%>
+        <% @booking = @bookings.where(student_id: student.id).last%>
           <p>
           <strong><%= "#{student.firstname} #{student.lastname}" %></strong>
           </p>
           <p class="lh-sm my-1">
           <strong>Age: </strong><%= ((Time.zone.now - student.dob.to_time) / 1.year.seconds).floor %>
           </p>
-          <%if @booking.present? %>
-          <p class="lh-sm my-1">
-          <strong>Booking: </strong> <%= @booking.date.strftime("%m/%d/%Y") %>
-          <%= @daytime.find(@timeslots.find(@booking.timeslot_id).daytime_id).time%>
-          </p>
+          <%if @booking.present? && @booking.date > Date.today-1%>
+            <p class="lh-sm my-1">
+            <strong>Next Booking: </strong> <%=link_to "#{@daytime.find(@timeslots.find(@booking.timeslot_id).daytime_id).time} - #{@booking.date.strftime("%d/%m/%Y")}", @booking %>
+            </p>
           <%end%>
           <p class="lh-sm mt-1 mb-3">
           <strong>Skill Level: </strong>Skill Goes Here (WiP)

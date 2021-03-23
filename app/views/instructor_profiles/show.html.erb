@@ -44,7 +44,7 @@
       <p class=" h4 text-center mt-4">Upcoming Bookings</p>
       <hr class="my-4">
       <% @current_bookings.order(:date).each do |booking| %>
-      <% if booking.date > Date.today+1%>
+      <% if booking.date >= Date.today%>
       <strong><%= booking.date.strftime('%A')%> <%= @daytime.find(@timeslots.find(booking.timeslot_id).daytime_id).time%> -</strong> <%= booking.date.strftime("%m/%d/%Y")%>
       <hr class="my-1">
       <strong>Parent: </strong><%= @parents.where(user_id: booking.user_id).first.firstname %> <%= @parents.where(user_id: booking.user_id).first.lastname %>
@@ -63,7 +63,7 @@
       <p class=" h4 text-center mt-4">Previous Bookings</p>
       <hr class="my-4">
       <% @current_bookings.order(:date).each do |booking| %>
-      <% if booking.date < Date.today+1%>
+      <% if booking.date < Date.today%>
       <strong><%= booking.date.strftime('%A')%> <%= @daytime.find(@timeslots.find(booking.timeslot_id).daytime_id).time%> -</strong> <%= booking.date.strftime("%m/%d/%Y")%>
       <hr class="my-1">
       <strong>Parent: </strong><%= @parents.where(user_id: booking.user_id).first.firstname %> <%= @parents.where(user_id: booking.user_id).first.lastname %>

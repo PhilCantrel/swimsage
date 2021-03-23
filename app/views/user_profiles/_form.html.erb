@@ -12,8 +12,9 @@
     <%= f.input :phone, :label => "Phone Number (+61)"%>
     <%= f.input :address, :label => "Street Address"%>
   </div>
-
+<hr class="my-2">
   <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= f.submit "Update Profile", class: "btn btn-primary mr-3" %>
+    <%= link_to 'Back to Profile', @user_profile, class: 'btn btn-primary'%>
   </div>
 <% end %>
